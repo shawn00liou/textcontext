@@ -1,0 +1,17 @@
+{
+  "pages":{
+    "symbol":{
+      "continuous":[","],
+      "period":[".",";"],
+      "endparticle":["!"]
+    },
+    "replace":{
+      "continuous":["，"],
+      "period":["。","；"],
+      "endparticle":["！"]
+    }
+  },
+  "world":{
+    "endparticle":["啊","呀","哇","呵","啦","咯"]
+  }
+}
