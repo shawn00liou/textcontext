@@ -74,7 +74,7 @@ export default class Index extends Vue {
       return currentValue;
     });
 
-    this.inputText = inputList.join('').split(this.findText).join(this.replaceText);
+    this.inputText = (this.findText && this.replaceText) ? inputList.join('').split(this.findText).join(this.replaceText) : inputList.join('');
   }
 }
 </script>
