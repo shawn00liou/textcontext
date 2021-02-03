@@ -8,6 +8,10 @@
       <q-card-section class="q-pa-none">
         <textarea class="has-error content" v-model.lazy="inputText" @change.prevent.stop="afterTextChange"></textarea>
       </q-card-section>
+      <q-card-section class="q-pa-none full-width row">
+        <q-btn flat label="Touch" class="col"></q-btn>
+        <q-btn flat label="Clean" class="col" @click.stop="onClean"></q-btn>
+      </q-card-section>
     </q-card>
   </q-page>
 </template>
@@ -59,9 +63,7 @@ export default class Index extends Vue {
       const reg = /\s/;
       if (reg.test(currentValue)) {
         // 如果是最末則句點,其他則可能為句號 或是分號做連詞
-        arrlist[currentIndex - 1] = `${accumulator}${
-          symbol[choose].period[currentPeriod]
-        }`;
+        arrlist[currentIndex - 1] = `${accumulator}${symbol[choose].period[currentPeriod]}`;
       } else {
         // 因為是結尾 所以不走空格
         currentValue =
@@ -74,7 +76,17 @@ export default class Index extends Vue {
       return currentValue;
     });
 
-    this.inputText = (this.findText && this.replaceText) ? inputList.join('').split(this.findText).join(this.replaceText) : inputList.join('');
+    this.inputText =
+      this.findText && this.replaceText
+        ? inputList
+          .join('')
+          .split(this.findText)
+          .join(this.replaceText)
+        : inputList.join('');
+  }
+
+  public onClean() {
+    this.inputText = '';
   }
 }
 </script>
