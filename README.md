@@ -38,5 +38,7 @@ aug
 
 jarsigner -verbose -keystore recordmy.keystore -signedjar app-release.apk app-release-unsigned.apk recordmy
 
+# 懶得設定 \$PATH 直接用路徑
+
 ~/Library/Android/sdk/build-tools/30.0.2/
 ./zipalign -v 4 ~/vuework/sitepackage.frontend.software/textcordova/dist/cordova/android/apk/release/app-release.apk ~/vuework/sitepackage.frontend.software/textcordova/dist/cordova/android/apk/app-release.apk
