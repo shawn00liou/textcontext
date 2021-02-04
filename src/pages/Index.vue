@@ -64,6 +64,7 @@ export default class Index extends Vue {
       if (reg.test(currentValue)) {
         // 如果是最末則句點,其他則可能為句號 或是分號做連詞
         arrlist[currentIndex - 1] = `${accumulator}${symbol[choose].period[currentPeriod]}`;
+        currentValue = '';
       } else {
         // 因為是結尾 所以不走空格
         currentValue =
