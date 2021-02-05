@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Ref } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 import siteconfigDemoJson from 'app/siteconfig.demo.json';
 import DefaultDialog from '../components/_global/dialog/DefaultDialog.vue';
 
@@ -40,11 +40,9 @@ interface CordovaPlugins {
   name: 'Index'
 })
 export default class Index extends Vue {
-  @Ref('dialog') public dialogRef?: DefaultDialog;
   public inputText = '';
   public findText = '';
   public replaceText = '';
-  public content = '';
 
   get baseJson() {
     return siteconfigDemoJson;
