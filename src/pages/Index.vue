@@ -10,6 +10,7 @@
       </q-card-section>
       <q-card-section class="q-pa-none full-width row">
         <q-btn flat label="Touch" class="col"></q-btn>
+        <q-btn flat label="未" class="col" @click.stop="onCopy"></q-btn>
         <q-btn flat label="Clean" class="col" @click.stop="onClean"></q-btn>
       </q-card-section>
     </q-card>
@@ -19,6 +20,18 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import siteconfigDemoJson from 'app/siteconfig.demo.json';
+
+interface ClipboardFunc {
+  (t: string): void;
+}
+
+interface Clipboard {
+  copy: ClipboardFunc;
+}
+
+interface CordovaPlugins {
+  clipboard?: Clipboard;
+}
 
 @Component<Index>({
   name: 'Index'
@@ -88,6 +101,17 @@ export default class Index extends Vue {
 
   public onClean() {
     this.inputText = '';
+  }
+
+  public onCopy() {
+    try {
+      const plugins: CordovaPlugins = cordova && cordova.plugins;
+      const clipboard = plugins.clipboard;
+      clipboard && clipboard.copy(this.inputText);
+    } catch (er) {
+      this.inputText = JSON.stringify(er);
+    }
+    // clipboard
   }
 }
 </script>
