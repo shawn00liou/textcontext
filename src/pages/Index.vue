@@ -21,7 +21,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 import siteconfigDemoJson from 'app/siteconfig.demo.json';
 import DefaultDialog from '../components/_global/dialog/DefaultDialog.vue';
-
+import { copyToClipboard } from 'quasar';
 // 定義 CordovaPlugins 需要的interface
 interface ClipboardFunc {
   (t: string, succ: VoidFunction, err: VoidFunction | null): void;
@@ -93,13 +93,9 @@ export default class Index extends Vue {
       return currentValue;
     });
 
-    this.inputText =
-      this.findText && this.replaceText
-        ? inputList
-          .join('')
-          .split(this.findText)
-          .join(this.replaceText)
-        : inputList.join('');
+    const context = inputList.join('');
+
+    this.inputText = this.findText && this.replaceText ? context.split(this.findText).join(this.replaceText) : context;
   }
 
   public onClean() {
@@ -123,9 +119,22 @@ export default class Index extends Vue {
           null
         );
     } catch (er) {
-      this.inputText = JSON.stringify(er);
+      this.webOnCopy(); // for web browser
     }
-    // clipboard
+  }
+
+  public webOnCopy() {
+    copyToClipboard(this.inputText)
+      .then(() => {
+        this.$q.dialog({
+          parent: this,
+          component: DefaultDialog,
+          content: 'copy success!!!'
+        });
+      })
+      .catch(() => {
+        //
+      });
   }
 }
 </script>
