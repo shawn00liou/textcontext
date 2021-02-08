@@ -11,6 +11,7 @@
       <q-card-section class="q-pa-none full-width row">
         <q-btn flat label="Touch" class="col"></q-btn>
         <q-btn flat label="Copy" class="col" @click.stop="onCopy"></q-btn>
+        <q-btn flat label="Ant" class="col" @click="onAnt"></q-btn>
         <q-btn flat label="Clean" class="col" @click.stop="onClean"></q-btn>
       </q-card-section>
     </q-card>
@@ -96,6 +97,11 @@ export default class Index extends Vue {
     const context = inputList.join('');
 
     this.inputText = this.findText && this.replaceText ? context.split(this.findText).join(this.replaceText) : context;
+  }
+
+  public onAnt() {
+    const ant = "\u0489";
+    this.inputText = this.inputText.replace(/(.{0})/g, '$1' + ant);
   }
 
   public onClean() {
