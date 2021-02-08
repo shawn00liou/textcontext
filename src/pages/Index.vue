@@ -100,8 +100,13 @@ export default class Index extends Vue {
   }
 
   public onAnt() {
-    const ant = "\u0489";
-    this.inputText = this.inputText.replace(/(.{0})/g, '$1' + ant);
+    const ant = '\u0489';
+
+    if (this.inputText.indexOf(ant) === -1) {
+      this.inputText = this.inputText.replace(/(.{0})/g, '$1' + ant);
+    } else {
+      this.inputText = this.inputText.replace(/\u0489/g, '');
+    }
   }
 
   public onClean() {
